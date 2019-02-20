@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="styles.css" />
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.0.0-alpha.6/css/bootstrap.min.css"
+    />
+
+    <script>
+      $(document).ready(function() {
+        $("#getQuote").on("click", function() {
+          $.ajaxSetup({ cache: false });
+          $.getJSON(
+            "https://quotesondesign.com/wp-json/posts?filter[orderby]=rand&callback=",
+            function(data) {
+              $(".message").html(data[0].content + " — " + data[0].title);
+            }
+          );
+        });
+      });
+
+      $(".btn").on("click", function() {
+        var randColor = Math.random();
+        if (randColor > 0 && randColor < 0.2) {
+          $(".btn, .everything").css("background-color", "#13dde7");
+          $(".message").css("color", "#13dde7");
+        } else if (randColor > 0.2 && randColor < 0.4) {
+          $(".btn, .everything").css("background-color", "#9952ef");
+          $(".message").css("color", "#9952ef");
+        } else if (randColor > 0.4 && randColor < 0.6) {
+          $(".btn, .everything").css("background-color", "#651521");
+          $(".message").css("color", "#651521");
+        } else if (randColor > 0.6 && randColor < 0.8) {
+          $(".btn, .everything").css("background-color", "#65e799");
+          $(".message").css("color", "#65e799");
+        } else if (randColor > 0.8 && randColor < 1) {
+          $(".btn, .everything").css("background-color", "#f17c65");
+          $(".message").css("color", "#f17c65");
+        }
+      });
+    </script>
+  </head>
+
+  <body class="everything" style="background-color: #65adf1">
+    <div class="container" id="content_box">
+      <div class="text-center">
+        <div id="quote" class="well col-xs-12">
+          <h3 class="message" style="font-family: sans-serif">
+            Random Quote Generator
+          </h3>
+        </div>
+      </div>
+
+      <div class="col-xs-12 row text-center quote_button">
+        <button
+          class="btn btn-primary"
+          id="getQuote"
+          style="background-color: #65adf1"
+        >
+          Get a quote
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
